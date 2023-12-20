@@ -1,0 +1,53 @@
+{
+  "name": "vp-bot",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/vp-bot/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/vp-bot",
+        "main": "apps/vp-bot/src/main.ts",
+        "tsConfig": "apps/vp-bot/tsconfig.app.json",
+        "assets": ["apps/vp-bot/src/assets"],
+        "webpackConfig": "apps/vp-bot/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "vp-bot:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "vp-bot:build:development"
+        },
+        "production": {
+          "buildTarget": "vp-bot:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/vp-bot/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
