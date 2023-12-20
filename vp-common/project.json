@@ -1,0 +1,20 @@
+{
+  "name": "vp-common",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "vp-common/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "vp-common/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

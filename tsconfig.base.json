@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@video-pal/vp-adapter-insta": ["vp-adapter-insta/src/index.ts"],
+      "@video-pal/vp-common": ["vp-common/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

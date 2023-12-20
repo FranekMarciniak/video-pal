@@ -2,7 +2,9 @@
   "name": "@video-pal/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start-dev": "nx run-many -t serve  vp-gateway vp-bot"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",
