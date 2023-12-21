@@ -1,4 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class TelegramService {}
+export class TelegramService {
+  testBot(): { message: string } {
+    return { message: 'Hello Telegram' };
+  }
+}

@@ -1,17 +1,22 @@
 import { Module } from '@nestjs/common';
-import { TelegramModule as TgModule } from 'nestjs-telegram';
 import { TelegramService } from './telegram.service';
 import { TelegramController } from './telegram.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { getTelegramConfig } from '../../config/telegram.config';
-
+import { TelegrafModule } from 'nestjs-telegraf';
+import { sessionMiddleware } from '../../middleware/session.middleware';
+import { ConfigEnvironmentVariables } from '../../interfaces/config.interface';
 @Module({
   imports: [
-    ConfigModule,
-    TgModule.forRootAsync({
+    ConfigModule.forRoot(),
+    TelegrafModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: getTelegramConfig,
       inject: [ConfigService],
+      useFactory: (
+        configService: ConfigService<ConfigEnvironmentVariables>
+      ) => ({
+        token: configService.get('telegram'),
+        middlewares: [sessionMiddleware],
+      }),
     }),
   ],
   providers: [TelegramService],
