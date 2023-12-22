@@ -32,11 +32,8 @@ jobs:
 
       - name: Build Nx vp-gateway
         run: npm run nx build vp-gateway
-
       - name: Build and push Docker images
         run: |
           docker buildx create --use
-          docker buildx build -t prostyfranek/video-pal-bot:latest -f ./Dockerfile.bot .
-          docker buildx build -t prostyfranek/video-pal-gateway:latest -f ./Dockerfile.gateway .
-          docker push prostyfranek/video-pal-bot:latest
-          docker push prostyfranek/video-pal-gateway:latest
+          docker buildx build -t prostyfranek/video-pal-bot:latest -f ./Dockerfile.bot . --push
+          docker buildx build -t prostyfranek/video-pal-gateway:latest -f ./Dockerfile.gateway . --push
