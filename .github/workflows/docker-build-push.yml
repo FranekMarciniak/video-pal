@@ -1,0 +1,28 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build and push Docker images
+        run: |
+          docker buildx create --use
+          docker buildx build -t prostyfranek/video-pal-bot:latest -f ./Dockerfile.bot .
+          docker buildx build -t prostyfranek/video-pal-gateway:latest -f ./Dockerfile.gateway .
+          docker push prostyfranek/video-pal-bot:latest
+          docker push prostyfranek/video-pal-gateway:latest
