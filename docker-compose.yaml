@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  vp-bot:
+    image: prostyfranek/video-pal-bot:latest 
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+
+  vp-gateway:
+    image: prostyfranek/video-pal-gateway:latest
+    ports:
+      - "4000:4000"  
+    env_file:
+      - .env
