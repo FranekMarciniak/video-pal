@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start-dev": "nx run-many -t serve  vp-gateway vp-bot"
+    "start-dev": "nx run-many -t serve  vp-gateway vp-bot",
+    "nx": "nx"
   },
   "private": true,
   "dependencies": {

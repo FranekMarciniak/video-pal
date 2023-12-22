@@ -24,17 +24,14 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Nx
-        run: npm install -g @nrwl/cli
-
       - name: Install dependencies
         run: npm install
 
       - name: Build Nx vp-bot
-        run: nx build vp-bot
+        run: npm nx build vp-bot
 
       - name: Build Nx vp-gateway
-        run: nx build vp-gateway
+        run: npm nx build vp-gateway
 
       - name: Build and push Docker images
         run: |
