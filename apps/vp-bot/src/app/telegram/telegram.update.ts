@@ -1,11 +1,16 @@
-import { Update, Ctx, Start } from 'nestjs-telegraf';
-import { Context } from 'telegraf';
+import { Update, Ctx, On } from 'nestjs-telegraf';
+import { Context } from '../../interfaces/config.interface';
+import { TelegramService } from './telegram.service';
 
 @Update()
 export class TelegramUpdate {
-  @Start()
-  async start(@Ctx() ctx: Context) {
-    console.log(ctx.chat.id);
-    await ctx.reply('Welcome');
+  constructor(private readonly telegramService: TelegramService) {}
+  @On('text')
+  async text(@Ctx() ctx: Context) {
+    const message = this.telegramService.mapContextToMessage(ctx);
+    if (!message) {
+      return;
+    }
+    await ctx.reply(message.platform + ' ' + message.sourceUrl);
   }
 }
